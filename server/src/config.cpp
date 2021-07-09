@@ -7,6 +7,8 @@ Config::Config(string file)
     cfg.readFile(file);
     cfg.lookupValue("port", port);
     cfg.lookupValue("ip", ip);
+    cfg.lookupValue("username", username);
+    cfg.lookupValue("password", password);
     cfg.lookupValue("mysql", mysql);
     cfg.lookupValue("mysql_username", mysql_username);
     cfg.lookupValue("mysql_password", mysql_password);

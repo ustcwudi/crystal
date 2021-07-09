@@ -11,6 +11,8 @@ private:
 public:
     int port;
     string ip;
+    string username;
+    string password;
     string mysql;
     string mysql_username;
     string mysql_password;

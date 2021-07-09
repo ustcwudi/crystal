@@ -77,31 +77,13 @@ void Udp::Listen()
             vector<std::string> login_message;
             split(message, ",", &login_message);
             // login
-            if (login_message.size() == 3)
+            if (login_message.size() == 3 && login_message[1] == config->username && login_message[2] == config->password)
             {
-                try
-                {
-                    // check user
-                    char sql[100];
-                    sprintf(sql, "select * from user where name = '%s' and password = '%s';", login_message[1].c_str(), login_message[2].c_str());
-                    ResultSet *result = mysql.state->executeQuery(sql);
-                    if (result->next())
-                    {
-                        sendto(sock_fd, "111", 4, 0, (struct sockaddr *)&addr_client, len);
-                    }
-                    else
-                    {
-                        sendto(sock_fd, "reject", 7, 0, (struct sockaddr *)&addr_client, len);
-                    }
-                }
-                catch (sql::SQLException &e)
-                {
-                    cout << "udp thread mysql error" << endl;
-                    cout << e.getSQLStateCStr() << endl;
-                }
+                sendto(sock_fd, "111", 4, 0, (struct sockaddr *)&addr_client, len);
             }
             else
             {
+                printf("login failed: %s : %s\n", login_message[1].c_str(), login_message[2].c_str());
                 sendto(sock_fd, "reject", 7, 0, (struct sockaddr *)&addr_client, len);
             }
         }

@@ -4,6 +4,10 @@ port=8825;
 //绑定本机IP
 ip="192.168.1.23"; 
 
+//账号信息
+username="admin"
+password="123"
+
 //数据库
 mysql="127.0.0.1:3306";
 mysql_username="root";
